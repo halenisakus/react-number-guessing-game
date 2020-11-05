@@ -79,6 +79,44 @@ class App extends Component {
       prev: [],
     });
   };
+
+  getNumberFromUser = (e) => {
+    let value = e.target.value;
+    let guessNum = this.state.guessNum;
+    let hintState = '';
+    let valueArr = [];
+
+    if (!isNaN(parseInt(value))) {
+      for (let i = 0; i < value.length; i++) {
+        valueArr.push(parseInt(value[i])); // [2, 3, 4, 5]
+      }
+      // doğru basamaktaysa +
+      // yanlış basamaktaysa -
+      // yer almıyorsa çıktı vermeyecek
+
+      //console.log(valueArr);
+      //console.log(guessNum);
+
+      for (let i = 0; i < 4; i++) {
+        if (valueArr[i] === guessNum[i]) {
+          hintState += '+';
+        } else if (guessNum.includes(valueArr[i])) {
+          hintState += '-';
+        }
+      }
+
+      this.setState({
+        number: parseInt(value),
+        hint: hintState,
+      });
+    } else {
+      this.setState({
+        number: '',
+        hint: '',
+      });
+    }
+    //console.log(val)
+  };
   render() {
     return (
       <div className="App">
@@ -87,7 +125,7 @@ class App extends Component {
           this.state.startGame === !true ? (
             <button onClick={() => this.startGame()}>Start Game</button>
           ) : (
-            <GuessNum />
+            <GuessNum changed={(e) => this.getNumberFromUser(e)} />
           )
         }
       </div>
