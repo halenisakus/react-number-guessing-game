@@ -21,7 +21,7 @@ class App extends Component {
       random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
     }
 
-    console.log(secret);
+    //console.log(secret);
 
     // [0, 1, 8, 6] gibi gelirse 0 üretmeyen random sayı al ve sıfırıncı indise ata
     if (secret[0] === 0) {
@@ -31,8 +31,29 @@ class App extends Component {
     }
     return secret;
   };
+  startGame = () => {
+    const stateGame = this.state.startGame;
+    let secret = this.generateNumber();
+    console.log(...this.state.guessNum);
+    this.setState({
+      guessNum: [...this.state.guessNum, ...secret],
+      startGame: !stateGame,
+    });
+  };
+  // 1195
   render() {
-    return <div className="App"></div>;
+    return (
+      <div className="App">
+        {
+          // conditional rendering
+          this.state.startGame === !true ? (
+            <button onClick={() => this.startGame()}>Yeni Oyun</button>
+          ) : (
+            <GuessNum />
+          )
+        }
+      </div>
+    );
   }
 }
 
