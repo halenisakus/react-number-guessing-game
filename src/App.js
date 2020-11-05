@@ -4,10 +4,7 @@ import GuessNum from './GuessNum';
 
 class App extends Component {
   state = {
-    prev: [
-      // {guess: 4464, hint:'+--'}
-      // {guess: 9014, hint:'++-'}
-    ],
+    prev: [],
     guessNum: [],
     number: '',
     hint: '',
@@ -17,17 +14,13 @@ class App extends Component {
   generateNumber = () => {
     let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     let random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
-    let secret = []; // [0]
+    let secret = [];
 
     for (let i = 0; i < 4; i++) {
       secret.push(numbers[random]);
       numbers.splice(numbers.indexOf(numbers[random]), 1);
       random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
     }
-
-    // console.log(secret);
-
-    // [0, 1, 8, 6] gibi gelirse 0 üretmeyen random sayı al ve sıfırıncı indise ata
     if (secret[0] === 0) {
       let val = Math.floor(Math.random() * numbers.length - 1 + 1);
       secret[0] = val;
@@ -39,29 +32,16 @@ class App extends Component {
   startGame = () => {
     const stateGame = this.state.startGame;
     let secret = this.generateNumber();
-    //console.log(secret); // mutate edilmez
     console.log(...this.state.guessNum);
     this.setState({
       guessNum: [...this.state.guessNum, ...secret],
       startGame: !stateGame,
     });
   };
-  // 1195
   newGame = () => {
-    // let updateArr = [...this.state.guessNum];
-    // console.log(updateArr);
-    // let secret = this.generateNumber();
-
-    // // if (secret[0] === 0) {
-    // //   secret[0] = Math.floor((Math.random() * 9) + 1);
-    // // }
-
-    // updateArr = [...secret]
-    // console.log(updateArr);
-
     let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     let random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
-    let secret = []; // [0]
+    let secret = [];
 
     for (let i = 0; i < 4; i++) {
       secret.push(numbers[random]);
@@ -69,9 +49,6 @@ class App extends Component {
       random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
     }
 
-    console.log(secret);
-    console.log('numbers', numbers);
-    // [0, 1, 8, 6] gibi gelirse 0 üretmeyen random sayı al ve sıfırıncı indise ata
     if (secret[0] === 0) {
       let val = Math.floor(Math.random() * numbers.length - 1 + 1);
       secret[0] = val;
@@ -93,15 +70,8 @@ class App extends Component {
 
     if (!isNaN(parseInt(value))) {
       for (let i = 0; i < value.length; i++) {
-        valueArr.push(parseInt(value[i])); // [2, 3, 4, 5]
+        valueArr.push(parseInt(value[i]));
       }
-      // doğru basamaktaysa +
-      // yanlış basamaktaysa -
-      // yer almıyorsa çıktı vermeyecek
-
-      //console.log(valueArr);
-      //console.log(guessNum);
-
       for (let i = 0; i < 4; i++) {
         if (valueArr[i] === guessNum[i]) {
           hintState += '+';
@@ -120,7 +90,6 @@ class App extends Component {
         hint: '',
       });
     }
-    //console.log(val)
   };
 
   handleKeyPress = (e) => {
@@ -129,7 +98,6 @@ class App extends Component {
         alert('en az bir değer tahmin edilmeli.');
       } else {
         this.newGame();
-
         this.setState({
           prev: [
             ...this.state.prev,
@@ -147,24 +115,20 @@ class App extends Component {
         <div className="definition">
           Random number selected 4-digits.You will get hint for your guess.
         </div>
-        {
-          // conditional rendering
-          this.state.startGame === !true ? (
-            <button onClick={() => this.startGame()}>Start Game</button>
-          ) : (
-            <GuessNum
-              prev={this.state.prev}
-              click={() => this.newGame()}
-              changed={(e) => this.getNumberFromUser(e)} //properties
-              val={this.state.number}
-              hint={this.state.hint}
-              keyPress={this.handleKeyPress}
-            />
-          )
-        }
+        {this.state.startGame === !true ? (
+          <button onClick={() => this.startGame()}>Start Game</button>
+        ) : (
+          <GuessNum
+            prev={this.state.prev}
+            click={() => this.newGame()}
+            changed={(e) => this.getNumberFromUser(e)}
+            val={this.state.number}
+            hint={this.state.hint}
+            keyPress={this.handleKeyPress}
+          />
+        )}
       </div>
     );
   }
 }
-
 export default App;

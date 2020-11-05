@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 class GuessNum extends Component {
-  // ya sınıftır ya da fonksiyondur
   render() {
     return (
       <>
@@ -18,14 +17,11 @@ class GuessNum extends Component {
           />
         </div>
         <h3>Previous Guess: </h3>
-
         <div className="prevGuess">
           <p>
             {this.props.val} | <b>{this.props.hint}</b>{' '}
           </p>
           {this.props.prev.reverse().map((p) => {
-            // array.map()
-            // console.log(prev.guess, prev.hint)
             return (
               <p key={Math.random()}>
                 {p.guess} | <b>{p.hint}</b>
