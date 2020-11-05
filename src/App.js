@@ -117,15 +117,56 @@ class App extends Component {
     }
     //console.log(val)
   };
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      // let val = 10000;
+      // let guessNum = 0;
+
+      // for (const element of this.state.guessNum) {
+
+      //     val = val / 10;
+      //     guessNum += element * val;
+
+      // }
+      // console.log(guessNum);
+      //console.log(this.props.guessNum)
+
+      // this.state.hint === 4
+
+      if (this.state.number === '') {
+        alert('en az bir değer tahmin edilmeli.');
+      } else {
+        if (this.state.hint.includes('-')) {
+          this.newGame();
+
+          this.setState({
+            prev: [
+              ...this.state.prev,
+              { guess: this.state.number, hint: this.state.hint },
+            ],
+          });
+        } else {
+          this.newGame();
+        }
+      }
+    }
+  };
   render() {
     return (
       <div className="App">
         {
           // conditional rendering
           this.state.startGame === !true ? (
-            <button onClick={() => this.startGame()}>Start Game</button>
+            <button onClick={() => this.startGame()}>Yeni Oyun</button>
           ) : (
-            <GuessNum changed={(e) => this.getNumberFromUser(e)} />
+            <GuessNum
+              prev={this.state.prev}
+              click={() => this.newGame()}
+              changed={(e) => this.getNumberFromUser(e)} //properties
+              val={this.state.number}
+              hint={this.state.hint}
+              keyPress={this.handleKeyPress}
+            />
           )
         }
       </div>
