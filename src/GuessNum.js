@@ -3,7 +3,7 @@ import './App.css';
 
 class GuessNum extends Component {
   render() {
-    return <h3>Tahmininiz: </h3>;
+    return <h3>Your Guesses: </h3>;
   }
 }
 

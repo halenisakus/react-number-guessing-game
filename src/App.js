@@ -41,13 +41,51 @@ class App extends Component {
     });
   };
   // 1195
+
+  newGame = () => {
+    // let updateArr = [...this.state.guessNum];
+    // console.log(updateArr);
+    // let secret = this.generateNumber();
+
+    // // if (secret[0] === 0) {
+    // //   secret[0] = Math.floor((Math.random() * 9) + 1);
+    // // }
+
+    // updateArr = [...secret]
+    // console.log(updateArr);
+
+    let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
+    let secret = []; // [0]
+
+    for (let i = 0; i < 4; i++) {
+      secret.push(numbers[random]);
+      numbers.splice(numbers.indexOf(numbers[random]), 1);
+      random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
+    }
+
+    console.log(secret);
+    console.log('numbers', numbers);
+    // [0, 1, 8, 6] gibi gelirse 0 üretmeyen random sayı al ve sıfırıncı indise ata
+    if (secret[0] === 0) {
+      let val = Math.floor(Math.random() * numbers.length - 1 + 1);
+      secret[0] = val;
+      numbers.splice(numbers.indexOf(numbers[val]), 1); //
+    }
+    this.setState({
+      guessNum: [...secret],
+      number: '',
+      hint: '',
+      prev: [],
+    });
+  };
   render() {
     return (
       <div className="App">
         {
           // conditional rendering
           this.state.startGame === !true ? (
-            <button onClick={() => this.startGame()}>Yeni Oyun</button>
+            <button onClick={() => this.startGame()}>Start Game</button>
           ) : (
             <GuessNum />
           )
