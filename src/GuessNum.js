@@ -2,18 +2,23 @@ import React, { Component } from 'react';
 import './App.css';
 
 class GuessNum extends Component {
+  // ya sınıftır ya da fonksiyondur
   render() {
     return (
       <>
-        <h3>Tahmininiz: </h3>
-        <input
-          type="text"
-          maxLength="4"
-          onChange={this.props.changed}
-          onKeyPress={this.props.keyPress}
-          value={this.props.val}
-        />
-        <h3>Önceki Tahminleriniz: </h3>
+        <h3>Your Guess: </h3>
+        <div>
+          <input
+            type="text"
+            maxLength="4"
+            placeholder="Enter a number"
+            onChange={this.props.changed}
+            onKeyPress={this.props.keyPress}
+            value={this.props.val}
+          />
+        </div>
+        <h3>Previous Guess: </h3>
+
         <div className="prevGuess">
           <p>
             {this.props.val} | <b>{this.props.hint}</b>{' '}
@@ -28,7 +33,7 @@ class GuessNum extends Component {
             );
           })}
         </div>
-        <button onClick={this.props.click}>Yeni Oyun</button>
+        <button onClick={this.props.click}>New Game</button>
       </>
     );
   }

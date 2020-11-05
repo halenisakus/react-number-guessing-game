@@ -3,12 +3,103 @@
 }
 
 .prevGuess {
-    border: 1px solid black;
+    border: 0.5px solid black;
     text-align: center;
-    max-width: 30%;
+    max-width: 10%;
     margin: 0 auto;
+    border-radius: 3px;
+    background-color: #ffc0cb;
+    margin-top: 10px;
+    color: black;
 }
 
 .prevGuess p {
-    border-bottom: 1px solid black
+    border-bottom: 0.5px solid black;
+}
+
+.title {
+    margin-bottom: .5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    background-color: #8a2be2;
+    font-size: 2.5rem;
+    width: 50%;
+    height: 52px;
+    color: white;
+    text-align: center;
+    padding-bottom: .25rem;
+    margin-top: 0;
+    margin: 0px auto;
+}
+
+.definition {
+    font-family: inherit;
+    position: relative;
+    font-weight: 50;
+    line-height: 1.2;
+    background-color: #8a2be2;
+    font-size: 1.1rem;
+    width: 50%;
+    height: 32px;
+    color: white;
+    text-align: center;
+    padding-bottom: .25rem;
+    margin: 0px auto;
+}
+
+input {
+    background-color: pink;
+    width: 250px;
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 40px;
+    border-radius: 2px;
+}
+
+h3 {
+    background-color: orchid;
+    background-position: center;
+    margin: 0px auto;
+    width: 254px;
+    height: 25px;
+    color: white;
+    font-family: inherit;
+    font-weight: 50;
+    font-size: 1.0rem;
+}
+
+button {
+    background: #e8c4e4;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#e8c4e4), to(#d698d0));
+    background: -moz-linear-gradient(#e8c4e4, #d698d0);
+    background: linear-gradient(#e8c4e4, #d698d0);
+    border: solid 1px #da9fd4;
+    border-bottom: solid 3px #946890;
+    box-shadow: inset 0 0 0 1px #f2dcef;
+    color: #7b5777;
+    text-shadow: 0 1px 0 #eacae6;
+    height: 45px;
+    width: 100px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #daa2d4;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#daa2d4), to(#e0b1db));
+    background: -moz-linear-gradient(#daa2d4, #e0b1db);
+    background: linear-gradient(#daa2d4, #e0b1db);
+    border: solid 1px #ca91c4;
+    border-bottom: solid 3px #946890;
+    box-shadow: inset 0 0 0 1px #e9c7e6;
+}
+
+button:active {
+    background: #d49ace;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#d49ace), to(#cc94c6));
+    background: -moz-linear-gradient(#d49ace, #cc94c6);
+    background: linear-gradient(#d49ace, #cc94c6);
+    border: solid 1px #8e678a;
+    box-shadow: inset 0 10px 15px 0 #ba87b5;
 }

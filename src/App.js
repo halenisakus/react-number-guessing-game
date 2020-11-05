@@ -4,12 +4,16 @@ import GuessNum from './GuessNum';
 
 class App extends Component {
   state = {
-    prev: [],
+    prev: [
+      // {guess: 4464, hint:'+--'}
+      // {guess: 9014, hint:'++-'}
+    ],
     guessNum: [],
     number: '',
     hint: '',
     startGame: false,
   };
+
   generateNumber = () => {
     let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     let random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
@@ -21,7 +25,7 @@ class App extends Component {
       random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
     }
 
-    //console.log(secret);
+    // console.log(secret);
 
     // [0, 1, 8, 6] gibi gelirse 0 üretmeyen random sayı al ve sıfırıncı indise ata
     if (secret[0] === 0) {
@@ -31,9 +35,11 @@ class App extends Component {
     }
     return secret;
   };
+
   startGame = () => {
     const stateGame = this.state.startGame;
     let secret = this.generateNumber();
+    //console.log(secret); // mutate edilmez
     console.log(...this.state.guessNum);
     this.setState({
       guessNum: [...this.state.guessNum, ...secret],
@@ -41,7 +47,6 @@ class App extends Component {
     });
   };
   // 1195
-
   newGame = () => {
     // let updateArr = [...this.state.guessNum];
     // console.log(updateArr);
@@ -117,47 +122,35 @@ class App extends Component {
     }
     //console.log(val)
   };
+
   handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      // let val = 10000;
-      // let guessNum = 0;
-
-      // for (const element of this.state.guessNum) {
-
-      //     val = val / 10;
-      //     guessNum += element * val;
-
-      // }
-      // console.log(guessNum);
-      //console.log(this.props.guessNum)
-
-      // this.state.hint === 4
-
       if (this.state.number === '') {
         alert('en az bir değer tahmin edilmeli.');
       } else {
-        if (this.state.hint.includes('-')) {
-          this.newGame();
+        this.newGame();
 
-          this.setState({
-            prev: [
-              ...this.state.prev,
-              { guess: this.state.number, hint: this.state.hint },
-            ],
-          });
-        } else {
-          this.newGame();
-        }
+        this.setState({
+          prev: [
+            ...this.state.prev,
+            { guess: this.state.number, hint: this.state.hint },
+          ],
+        });
       }
     }
   };
+
   render() {
     return (
       <div className="App">
+        <div className="title">Number Guessing Game</div>
+        <div className="definition">
+          Random number selected 4-digits.You will get hint for your guess.
+        </div>
         {
           // conditional rendering
           this.state.startGame === !true ? (
-            <button onClick={() => this.startGame()}>Yeni Oyun</button>
+            <button onClick={() => this.startGame()}>Start Game</button>
           ) : (
             <GuessNum
               prev={this.state.prev}
