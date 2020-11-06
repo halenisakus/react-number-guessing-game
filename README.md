@@ -1,6 +1,6 @@
 # REACT NUMBER GUESSING GAME
 
-## Kurulum
+## Installation
 
 ```bash
 git clone https://github.com/halenisakus/react-number-guessing-game.git
