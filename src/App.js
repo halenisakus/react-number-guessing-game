@@ -21,6 +21,7 @@ class App extends Component {
       numbers.splice(numbers.indexOf(numbers[random]), 1);
       random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
     }
+
     if (secret[0] === 0) {
       let val = Math.floor(Math.random() * numbers.length - 1 + 1);
       secret[0] = val;
@@ -32,28 +33,14 @@ class App extends Component {
   startGame = () => {
     const stateGame = this.state.startGame;
     let secret = this.generateNumber();
-    console.log(...this.state.guessNum);
     this.setState({
       guessNum: [...this.state.guessNum, ...secret],
       startGame: !stateGame,
     });
   };
+
   newGame = () => {
-    let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
-    let secret = [];
-
-    for (let i = 0; i < 4; i++) {
-      secret.push(numbers[random]);
-      numbers.splice(numbers.indexOf(numbers[random]), 1);
-      random = Math.floor(Math.random() * (numbers.length - 1 - 0 + 1));
-    }
-
-    if (secret[0] === 0) {
-      let val = Math.floor(Math.random() * numbers.length - 1 + 1);
-      secret[0] = val;
-      numbers.splice(numbers.indexOf(numbers[val]), 1); //
-    }
+    let secret = this.generateNumber();
     this.setState({
       guessNum: [...secret],
       number: '',
@@ -95,15 +82,25 @@ class App extends Component {
   handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       if (this.state.number === '') {
-        alert('en az bir değer tahmin edilmeli.');
+        alert('Enter a 4-digits number please');
       } else {
-        this.newGame();
-        this.setState({
-          prev: [
-            ...this.state.prev,
-            { guess: this.state.number, hint: this.state.hint },
-          ],
-        });
+        if (this.state.number.toString().length < 4) {
+          alert('The must be 4-digits');
+        } else {
+          if (this.state.hint.includes('-')) {
+            this.setState({
+              prev: [
+                ...this.state.prev,
+                { guess: this.state.number, hint: this.state.hint },
+              ],
+              number: '',
+              hint: '',
+            });
+          } else {
+            alert('Congratulations!.Right guess.New game is starting...');
+            this.newGame();
+          }
+        }
       }
     }
   };

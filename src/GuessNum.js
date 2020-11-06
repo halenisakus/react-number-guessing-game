@@ -16,7 +16,7 @@ class GuessNum extends Component {
             value={this.props.val}
           />
         </div>
-        <h3>Previous Guess: </h3>
+        <h3>Previous Guesses: </h3>
         <div className="prevGuess">
           <p>
             {this.props.val} | <b>{this.props.hint}</b>{' '}
